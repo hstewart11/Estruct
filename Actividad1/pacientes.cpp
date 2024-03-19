@@ -41,6 +41,7 @@ void registrar() {
     }
 }
 
+
 void mostrar() {
     for (aux = cab; aux != NULL; aux = aux->sig) {
         cout << "REGISTRO DE VISITAS: " << endl << endl;
