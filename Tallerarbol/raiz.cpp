@@ -11,6 +11,7 @@ struct nodo {
     int an;
     int mes;
     int dia;
+    int gen;
     nodo *izq;
     nodo *der;
 }; 
@@ -116,6 +117,9 @@ int registrar(){
     cin>>aux->mes;
     cout<<"\nIngrese el dia de nacimiento"<<endl;
     cin>>aux->dia;
+    cout<<"\nIngrese con que genero se identifica( 1. Masculino, 2. Femenino, 3. Np)"<<endl;
+    cin>>aux->gen;
+    
     aux->izq = NULL;
     aux->der = NULL;
    
@@ -137,8 +141,54 @@ int registrar(){
     return 0;
 }
 
+// int mgen(){
+//     int mas = 0;
+//     int fem = 0;
+//     int npe = 0;
+//     aux3 = aux;
+//     if (aux3->gen == 1) {
+//         mas++;
+//         cout<<"hombre"<< mas;
+//     }
+//     else if(aux3->gen == 2) {
+//         fem++;
+//         cout<<"mujer"<< fem;
+//     }
+//     else if(aux3->gen == 3) {
+//         npe++;
+//         cout<<"no respondió"<< npe;
+//     }
+//              return 0;
+    
+
+// }
 int preorden(nodo *recursive){
     cout<<"Nombre: "<<recursive->est<<", Año: "<<recursive->an<<", Mes: "<<recursive->mes<<", Dia: "<<recursive->dia<<endl;
+    if(recursive->izq != NULL){
+        preorden(recursive->izq);
+    }
+    if(recursive->der != NULL){
+        preorden(recursive->der);
+    }
+    return 0;
+}
+int mgen(nodo *recursive){
+     int mas = 0;
+    int fem = 0;
+    int npe = 0;
+    aux3 = aux;
+    if (aux3->gen == 1) {
+        mas++;
+        cout<<"Se identifican "<<mas<< "como masculino";
+    }
+    else if(aux3->gen == 2) {
+        fem++;
+        cout<<"Se identifican "<<fem<<"como femenino";
+    }
+    else if(aux3->gen == 3) {
+        npe++;
+        cout<<npe<<" No respondieron";
+    }
     if(recursive->izq != NULL){
         preorden(recursive->izq);
     }
@@ -200,7 +250,7 @@ int postorden2(nodo *recursive){
 
 int eliminar(nodo *&raiz, int codigo) {
     if (raiz == NULL) {
-        cout << "El árbol está vacío." << endl;
+        cout << "El arbol esta vacio." << endl;
         return 0;
     }
 
@@ -218,7 +268,7 @@ int eliminar(nodo *&raiz, int codigo) {
     }
 
     if (actual == NULL) {
-        cout << "No se encontró el estudiante con el código especificado." << endl;
+        cout << "No se encontro el estudiante con el codigo especificado." << endl;
         return 0;
     }
 
@@ -293,7 +343,8 @@ int main(){
         cout<<"6. Mostrar por año postorden"<<endl;
         cout<<"7. Mostrar por codigo postorden"<<endl;
         cout<<"8. Eliminar estudiante"<<endl;
-        cout<<"9. Salir"<<endl;
+        cout<<"9. Mostrar por genero"<<endl;
+        cout<<"10. Salir"<<endl;
         cin>>opc;
         cin.clear();
         switch (opc)
@@ -336,8 +387,12 @@ int main(){
             cin >> elim;
             eliminar(raiz, elim);
             break;
+            
+        case 9:
+            mgen(raiz);
+            break;
         }
 
-    } while(opc!=9);
+    } while(opc!=10);
 }
 
